@@ -1,0 +1,113 @@
+
+<html> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" 
+     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
+    crossorigin="anonymous" />
+<link rel="stylesheet" href="style.css" type="text/css">
+
+    <title >Weather App</title>
+</head>
+
+<body>
+
+<div class="box">
+    <div class="wave -one"></div>
+    <div class="wave -two"></div>
+    <div class="wave -three"></div>
+ 
+    <div id="weathercon">
+
+    <i class="fas fa-sun" style="color:#eccc68"></i>
+</div> 
+
+
+<div class="info">
+    <h2 class="location"> <i class="fas fa-street-view"></i>{%location%},{%country%}</h2>
+   <p id="date">sat |Sept  29 2021 |1:34PM</p>
+   <h1 class="temp">{%tempval%}&deg;C</h1>
+   <h3 class="tempmin_max">Min {%tempmin%}&deg;C| Max {%tempmax%}&deg;C</h3>
+
+</div>
+
+</div>
+<script>
+    const curDate=document.getElementById("date");
+    const  weathercon=document.getElementById("weathercon");
+    const tempStatus= "{%tempstatus%}";
+
+    if(tempStatus=="Sunny")
+    {
+        weathercon.innerHTML="<i class='fas fa-sun' style='color:#eccc68'></i>";
+    }
+   else if(tempStatus=="Clouds")
+    {
+        weathercon.innerHTML="<i class='fas fa-cloud' style='color:#f1f2f3'></i>";
+    }
+   else if(tempStatus=="Rainy")
+    {
+        weathercon.innerHTML="<i class='fas fa-rain' style='color:#a4b0be'></i>";
+    }
+    else
+    {
+        weathercon.innerHTML="<i class='fas fa-cloud-moon' style='color: white'></i>";
+    }
+
+    const getCurrentDay=()=>
+    {
+     
+        var wd=new Array(7);
+        wd[0]="Sunday";
+        wd[1]= "Monday"
+        wd[2]="Tuesday";
+        wd[3]="wednesday";
+        wd[4]="Thursday";
+        wd[5]="Friday";
+        wd[6]="Saturday";
+
+        let currentTime=new Date();
+        let res=wd[currentTime.getDay()];
+        return res +"|";  
+    };
+
+    const getCurrentTime=()=>
+    {
+        var wd=new Array(12);
+        wd[0]="Jan";
+        wd[1]= "Feb"
+        wd[2]= "March";
+        wd[3]= "April";
+        wd[4]= "May";
+        wd[5]= "June";
+        wd[6]= "July";
+        wd[7]= "Aug";
+        wd[8]= "Sept";
+        wd[9]= " Oct";
+        wd[10]="Nov";
+        wd[11]= "Dec";
+   var now=new Date();
+   var month=wd[now.getMonth()];
+   var day =now.getDate();
+   let hours=now.getHours();
+   let mins=now.getMinutes();
+
+  let pp="AM";
+   if(hours >11)
+   pp="PM";
+   if(hours >12)
+   hours-=12;
+
+   if(mins < 10) 
+   mins="0"+ mins;
+
+return `${month} ${day} | ${hours}:${mins} ${pp}`;
+
+    }
+    curDate.innerHTML= getCurrentDay() +" " +getCurrentTime(); 
+ 
+</script>
+</body>
+</html>
